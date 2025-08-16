@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class QuestionScreen extends StatefulWidget {
-  const QuestionScreen({super.key});
+  const QuestionScreen({super.key, required this.addSelectedAnswers});
+
+  final Function addSelectedAnswers;
 
   @override
   State<StatefulWidget> createState() {
@@ -14,11 +16,11 @@ class QuestionScreen extends StatefulWidget {
 
 class _QuestionScreen extends State<QuestionScreen> {
   var currentQuestionIndex = 0;
-  var answers = <String>{};
 
-  void answerQuestion() {
+  void answerQuestion(String selectedAnswer) {
     setState(() {
       currentQuestionIndex++;
+      widget.addSelectedAnswers(selectedAnswer);
     });
   }
 
