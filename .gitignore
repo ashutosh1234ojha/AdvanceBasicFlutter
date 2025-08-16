@@ -1,0 +1,48 @@
+# Flutter specific
+.flutter-plugins
+.dart_tool/
+.packages
+.pub/
+build/
+*.iml
+.idea/
+.vscode/
+
+# Android specific
+android/app/google-services.json
+android/key.properties
+android/.gradle/
+android/local.properties
+android/build/
+android/app/build/
+android/app/.idea/
+
+# iOS specific
+ios/.generated/
+ios/Podfile.lock
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Debug.xcconfig
+ios/Flutter/Release.xcconfig
+ios/Runner.xcworkspace/contents.xcworkspacedata
+
+# Web specific
+web/
+.dart_tool/
+.packages
+
+# macOS specific
+macos/build/
+macos/.generated/
+
+# Windows specific
+windows/build/
+windows/.generated/
+
+# Linux specific
+linux/build/
+linux/.generated/
+
+# Other common ignored files
+.DS_Store
+.env # If you use environment variables, ignore this file and create a .env.example

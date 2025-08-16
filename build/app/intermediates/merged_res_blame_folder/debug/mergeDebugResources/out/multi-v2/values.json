@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "/Users/ashutoshojha/Documents/Flutter_Projects/advance_basic/android/app/src/main/res/values/styles.xml",
+                    "source": "/Users/ashutoshojha/Documents/AdvanceBasicFlutter/android/app/src/main/res/values/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
