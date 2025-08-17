@@ -13,16 +13,47 @@ class QuestionSummary extends StatelessWidget {
         child: Column(
           children:
               summaryData.map((data) {
+                bool isCorrect =
+                    data["user_answer"] ==
+                    data["correct_answer"]; // your condition
+
                 return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(((data['question_index'] as int) + 1).toString()),
+                    Container(
+                      width: 40, // size of the circle
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color:
+                            isCorrect
+                                ? Colors.green
+                                : Colors.pinkAccent, // circle color
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: Text(
+                          ((data['question_index'] as int) + 1).toString(),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10),
                     Expanded(
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(data['question'] as String),
+                          Text(
+                            data['question'] as String,
+                            style: TextStyle(color: Colors.white),
+                          ),
                           SizedBox(height: 5),
-                          Text(data['user_answer'] as String),
-                          Text(data['correct_answer'] as String),
+                          Text(
+                            data['user_answer'] as String,
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                          Text(
+                            data['correct_answer'] as String,
+                            style: TextStyle(color: Colors.blueGrey),
+                          ),
                         ],
                       ),
                     ),

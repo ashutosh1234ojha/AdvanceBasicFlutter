@@ -41,6 +41,7 @@ class ResultsScreen extends StatelessWidget {
           children: [
             Text(
               "You answered $noOfTotalCorrectAnswer out of $noOfTotalQuestion questions correctly!",
+              style: TextStyle(color: Colors.yellow),
             ),
 
             SizedBox(height: 30),
@@ -48,7 +49,13 @@ class ResultsScreen extends StatelessWidget {
             QuestionSummary(summaryData),
             SizedBox(height: 30),
 
-            TextButton(onPressed: () => {}, child: Text("Restart quiz")),
+            TextButton(
+              onPressed: () => {},
+              child: Text(
+                "Restart quiz",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
           ],
         ),
       ),
