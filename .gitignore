@@ -46,3 +46,15 @@ linux/.generated/
 # Other common ignored files
 .DS_Store
 .env # If you use environment variables, ignore this file and create a .env.example
+
+# Flutter/Dart/Pub related
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+
+# Android related
+build/
+*.apk
+*.aar
+*.iml
