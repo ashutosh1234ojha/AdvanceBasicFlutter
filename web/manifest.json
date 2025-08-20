@@ -1,6 +1,6 @@
 {
-    "name": "advance_basic",
-    "short_name": "advance_basic",
+    "name": "expense_trakcer",
+    "short_name": "expense_trakcer",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
