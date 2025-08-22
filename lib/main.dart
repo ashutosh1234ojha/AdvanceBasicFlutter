@@ -1,4 +1,4 @@
-import 'package:expense_trakcer/expense.dart';
+import 'package:expense_trakcer/expenses.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,6 +11,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: Expense());
+    return const MaterialApp(home: Expenses());
   }
 }
