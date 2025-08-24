@@ -61,7 +61,10 @@ class _ExpenseState extends State<Expenses> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [Text("chart"), ExpensesList(expense: _registeredExpenses)],
+        children: [
+          Text("chart"),
+          Expanded(child: ExpensesList(expense: _registeredExpenses)),
+        ],
       ),
     );
   }
