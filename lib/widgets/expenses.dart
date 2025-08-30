@@ -12,52 +12,6 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpenseState extends State<Expenses> {
-  final List<Expense> registeredExpenses = [
-    Expense(
-      title: "Flutter course",
-      amount: 19.99,
-      date: DateTime.now(),
-      category: Category.work,
-    ),
-    Expense(
-      title: "Cinema",
-      amount: 15.69,
-      date: DateTime.now(),
-      category: Category.lesiure,
-    ),
-    Expense(
-      title: "Cinema",
-      amount: 15.69,
-      date: DateTime.now(),
-      category: Category.lesiure,
-    ),
-    Expense(
-      title: "Cinema",
-      amount: 15.69,
-      date: DateTime.now(),
-      category: Category.lesiure,
-    ),
-
-    Expense(
-      title: "Cinema",
-      amount: 15.69,
-      date: DateTime.now(),
-      category: Category.lesiure,
-    ),
-    Expense(
-      title: "Cinema",
-      amount: 15.69,
-      date: DateTime.now(),
-      category: Category.lesiure,
-    ),
-    Expense(
-      title: "Cinema",
-      amount: 15.69,
-      date: DateTime.now(),
-      category: Category.lesiure,
-    ),
-  ];
-
   final List<Expense> _registeredExpenses = [];
 
   void _addListData(Expense item) {
@@ -82,6 +36,15 @@ class _ExpenseState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    Widget mainComponent = const Center(child: Text("Add items to the list"));
+
+    if (_registeredExpenses.isNotEmpty) {
+      mainComponent = ExpensesList(
+        expense: _registeredExpenses,
+        removeExpense: _removeListData,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Flutter Expense Tracker"),
@@ -89,17 +52,7 @@ class _ExpenseState extends State<Expenses> {
           IconButton(onPressed: _openAddExpenseOverlay, icon: Icon(Icons.add)),
         ],
       ),
-      body: Column(
-        children: [
-          Text("chart"),
-          Expanded(
-            child: ExpensesList(
-              expense: _registeredExpenses,
-              removeExpense: _removeListData,
-            ),
-          ),
-        ],
-      ),
+      body: Column(children: [Text("chart"), Expanded(child: mainComponent)]),
     );
   }
 }
