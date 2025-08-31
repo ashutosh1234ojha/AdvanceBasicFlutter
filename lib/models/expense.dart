@@ -42,7 +42,7 @@ class ExpenseBucket {
     : expenses =
           allExpenses.where((expense) => expense.category == category).toList();
 
-  double getTotalExpenses() {
+  double get totalExpenses {
     double sum = 0;
     for (final expense in expenses) {
       sum += expense.amount;
