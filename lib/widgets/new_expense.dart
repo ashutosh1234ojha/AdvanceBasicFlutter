@@ -84,11 +84,11 @@ class _NewExpenseState extends State<NewExpense> {
   Widget build(BuildContext context) {
     var keyBoardSpacinng = MediaQuery.of(context).viewInsets.bottom;
 
-    return Padding(
-      padding: EdgeInsets.fromLTRB(16, 48, 16, keyBoardSpacinng + 16),
-      child: SizedBox(
-        height: double.infinity,
-        child: SingleChildScrollView(
+    return SizedBox(
+      height: double.infinity,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(16, 48, 16, keyBoardSpacinng + 16),
           child: Column(
             children: [
               TextField(
