@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       home: Expenses(),
       darkTheme: ThemeData.dark().copyWith(
         colorScheme: kDarkColorScheme,
-        cardTheme: CardTheme().copyWith(
+        cardTheme: CardThemeData().copyWith(
           color: kDarkColorScheme.secondaryContainer,
           margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         ),
@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: kColorScheme.onPrimaryContainer,
           foregroundColor: kColorScheme.primaryContainer,
         ),
-        cardTheme: CardTheme().copyWith(
+        cardTheme: CardThemeData().copyWith(
           color: kColorScheme.secondaryContainer,
           margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         ),
