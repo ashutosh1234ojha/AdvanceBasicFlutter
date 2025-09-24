@@ -65,3 +65,5 @@ build/
 build/
 .flutter-plugins
 .flutter-plugins-dependencies
+/build/
+
