@@ -1,4 +1,5 @@
 import 'package:expense_trakcer/models/meal.dart';
+import 'package:expense_trakcer/screens/meal_details.dart';
 import 'package:expense_trakcer/widgets/meal_item.dart';
 import 'package:flutter/material.dart';
 
@@ -8,11 +9,29 @@ class MealsScreen extends StatelessWidget {
   final String title;
   final List<Meal> meals;
 
+  void _selectMeal(BuildContext context, Meal meal) {
+    // final filteredMeals =
+    //     dummyMeals
+    //         .where((meal) => meal.categories.contains(category.id))
+    //         .toList();
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (ctx) => MealDetailsScreenn(meal: meal)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget content = ListView.builder(
       itemCount: meals.length,
-      itemBuilder: (ctx, index) => MealItem(meal: meals[index]),
+      itemBuilder:
+          (ctx, index) => MealItem(
+            meal: meals[index],
+            onSelectMeal: (meal) {
+              _selectMeal(context, meal);
+            },
+          ),
     );
 
     if (meals.isEmpty) {
