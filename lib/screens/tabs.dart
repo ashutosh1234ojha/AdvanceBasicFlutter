@@ -1,6 +1,7 @@
 import 'package:expense_trakcer/models/meal.dart';
 import 'package:expense_trakcer/screens/categories.dart';
 import 'package:expense_trakcer/screens/meals.dart';
+import 'package:expense_trakcer/widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
 
 class TabsScreen extends StatefulWidget {
@@ -45,6 +46,13 @@ class _TabsScreenState extends State<TabsScreen> {
     });
   }
 
+  void _setScreen(String id) {
+    if (id == "fileters") {
+    } else {
+      Navigator.of(context).pop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var activePageTitle = "Categories";
@@ -61,6 +69,7 @@ class _TabsScreenState extends State<TabsScreen> {
     }
     return Scaffold(
       appBar: AppBar(title: Text(activePageTitle)),
+      drawer: MainDrawer(onSelectScreen: _setScreen),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedPageIndex,
