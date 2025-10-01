@@ -1,5 +1,6 @@
 import 'package:expense_trakcer/models/meal.dart';
 import 'package:expense_trakcer/screens/categories.dart';
+import 'package:expense_trakcer/screens/filters.dart';
 import 'package:expense_trakcer/screens/meals.dart';
 import 'package:expense_trakcer/widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
@@ -47,9 +48,12 @@ class _TabsScreenState extends State<TabsScreen> {
   }
 
   void _setScreen(String id) {
+    Navigator.of(context).pop();
+
     if (id == "filters") {
-    } else {
-      Navigator.of(context).pop();
+      Navigator.of(
+        context,
+      ).push(MaterialPageRoute(builder: (ctx) => const FiltersScreen()));
     }
   }
 
