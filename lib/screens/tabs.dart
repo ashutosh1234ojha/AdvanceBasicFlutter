@@ -47,7 +47,7 @@ class _TabsScreenState extends State<TabsScreen> {
   }
 
   void _setScreen(String id) {
-    if (id == "fileters") {
+    if (id == "filters") {
     } else {
       Navigator.of(context).pop();
     }
