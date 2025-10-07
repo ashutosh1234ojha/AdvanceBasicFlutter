@@ -4,27 +4,15 @@ import 'package:expense_trakcer/widgets/meal_item.dart';
 import 'package:flutter/material.dart';
 
 class MealsScreen extends StatelessWidget {
-  const MealsScreen({
-    super.key,
-    this.title,
-    required this.meals,
-    required this.onToggleFavorite,
-  });
+  const MealsScreen({super.key, this.title, required this.meals});
 
   final String? title;
   final List<Meal> meals;
-  final void Function(Meal) onToggleFavorite;
 
   void _selectMeal(BuildContext context, Meal meal) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder:
-            (ctx) => MealDetailsScreenn(
-              meal: meal,
-              onToggleFavorite: onToggleFavorite,
-            ),
-      ),
+      MaterialPageRoute(builder: (ctx) => MealDetailsScreenn(meal: meal)),
     );
   }
 
