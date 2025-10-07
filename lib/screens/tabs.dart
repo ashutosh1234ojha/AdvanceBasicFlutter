@@ -1,6 +1,7 @@
 import 'package:expense_trakcer/data/dummy_data.dart';
 import 'package:expense_trakcer/models/meal.dart';
 import 'package:expense_trakcer/providers/favorites_provider.dart';
+import 'package:expense_trakcer/providers/filters_provider.dart';
 import 'package:expense_trakcer/providers/meals_provider.dart';
 import 'package:expense_trakcer/screens/categories.dart';
 import 'package:expense_trakcer/screens/filters.dart';
@@ -40,34 +41,29 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
   void _setScreen(String id) async {
     Navigator.of(context).pop();
 
-    if (id == "filters") {
-      final result = await Navigator.of(context).push<Map<Filter, bool>>(
-        MaterialPageRoute(
-          builder: (ctx) => FiltersScreen(currentFilters: _selectedFilter),
-        ),
+    if (id == 'filters') {
+      await Navigator.of(context).push<Map<Filter, bool>>(
+        MaterialPageRoute(builder: (ctx) => const FiltersScreen()),
       );
-
-      setState(() {
-        _selectedFilter = result ?? kInitialFilters;
-      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final meals = ref.watch(mealsProvider);
+    final activeFilters = ref.watch(filterProvider);
     final availableMeals =
         meals.where((meal) {
-          if (_selectedFilter[Filter.glutenFree]! && !meal.isGlutenFree) {
+          if (activeFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
             return false;
           }
-          if (_selectedFilter[Filter.lactoseFree]! && !meal.isLactoseFree) {
+          if (activeFilters[Filter.lactoseFree]! && !meal.isLactoseFree) {
             return false;
           }
-          if (_selectedFilter[Filter.veg]! && !meal.isVegetarian) {
+          if (activeFilters[Filter.veg]! && !meal.isVegetarian) {
             return false;
           }
-          if (_selectedFilter[Filter.vegan]! && !meal.isVegan) {
+          if (activeFilters[Filter.vegan]! && !meal.isVegan) {
             return false;
           }
           return true;

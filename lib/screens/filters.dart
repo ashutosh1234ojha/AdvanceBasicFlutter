@@ -1,20 +1,19 @@
+import 'package:expense_trakcer/providers/filters_provider.dart';
 import 'package:expense_trakcer/screens/tabs.dart';
 import 'package:expense_trakcer/widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-enum Filter { glutenFree, lactoseFree, veg, vegan }
+class FiltersScreen extends ConsumerStatefulWidget {
+  const FiltersScreen({super.key});
 
-class FiltersScreen extends StatefulWidget {
-  const FiltersScreen({super.key, required this.currentFilters});
-
-  final Map<Filter, bool> currentFilters;
   @override
-  State<FiltersScreen> createState() {
+  ConsumerState<FiltersScreen> createState() {
     return _FiltersScreenState();
   }
 }
 
-class _FiltersScreenState extends State<FiltersScreen> {
+class _FiltersScreenState extends ConsumerState<FiltersScreen> {
   var _glutenFreeFilterSet = false;
   var _lactoseFreeFilterSet = false;
   var _vegFilterSet = false;
@@ -22,25 +21,26 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _glutenFreeFilterSet = widget.currentFilters[Filter.glutenFree]!;
-    _lactoseFreeFilterSet = widget.currentFilters[Filter.lactoseFree]!;
-    _vegFilterSet = widget.currentFilters[Filter.veg]!;
-    _veganFilterSet = widget.currentFilters[Filter.vegan]!;
+    final activeFilters = ref.read(filterProvider);
+    _glutenFreeFilterSet = activeFilters[Filter.glutenFree]!;
+    _lactoseFreeFilterSet = activeFilters[Filter.lactoseFree]!;
+    _vegFilterSet = activeFilters[Filter.veg]!;
+    _veganFilterSet = activeFilters[Filter.vegan]!;
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.of(context).pop({
+        ref.read(filterProvider.notifier).setFilters({
           Filter.glutenFree: _glutenFreeFilterSet,
           Filter.lactoseFree: _lactoseFreeFilterSet,
           Filter.veg: _vegFilterSet,
           Filter.vegan: _vegFilterSet,
         });
-        return false;
+        // Navigator.of(context).pop();
+        return true;
       },
       child: Scaffold(
         appBar: AppBar(title: const Text("Your filters")),
