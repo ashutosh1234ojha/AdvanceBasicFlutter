@@ -1,5 +1,3 @@
-import 'package:expense_trakcer/screens/categories.dart';
-import 'package:expense_trakcer/screens/tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,6 +22,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: theme, home: TabsScreen());
+    return MaterialApp(theme: theme, home: Text("home"));
   }
 }
