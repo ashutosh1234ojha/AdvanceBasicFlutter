@@ -1,21 +1,9 @@
 import 'package:expense_trakcer/data/categories.dart';
+import 'package:expense_trakcer/models/categories.dart';
+import 'package:expense_trakcer/models/grocery_item.dart';
 import 'package:flutter/foundation.dart';
 
-class GroceryItem {
-  GroceryItem({
-    required this.id,
-    required this.name,
-    required this.quantity,
-    required this.category,
-  });
-
-  String id;
-  String name;
-  int quantity;
-  Category category;
-}
-
-var groceryItems = [
+final groceryItems = [
   GroceryItem(
     id: 'a',
     name: 'Milk',

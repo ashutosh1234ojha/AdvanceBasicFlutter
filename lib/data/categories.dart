@@ -1,7 +1,7 @@
 import 'package:expense_trakcer/models/categories.dart';
 import 'package:flutter/material.dart';
 
-var categories = {
+final categories = {
   Categories.vegetables: Category(
     'Vegetables',
     Color.fromARGB(255, 0, 255, 128),
