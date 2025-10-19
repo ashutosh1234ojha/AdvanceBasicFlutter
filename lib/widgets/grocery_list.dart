@@ -1,7 +1,12 @@
+import 'dart:convert';
+
+import 'package:expense_trakcer/data/categories.dart';
 import 'package:expense_trakcer/data/dummy_items.dart';
+import 'package:expense_trakcer/models/categories.dart';
 import 'package:expense_trakcer/models/grocery_item.dart';
 import 'package:expense_trakcer/widgets/new_item.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class GroceryList extends StatefulWidget {
   const GroceryList({super.key});
@@ -11,19 +16,52 @@ class GroceryList extends StatefulWidget {
 }
 
 class _GroceryListState extends State<GroceryList> {
-  final List<GroceryItem> _groceryItem = [];
+  List<GroceryItem> _groceryItem = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadItem();
+  }
+
+  void _loadItem() async {
+    final url = Uri.https(
+      'flutterapp-1a703-default-rtdb.firebaseio.com',
+      'shopping-list.json',
+    );
+
+    final response = await http.get(url);
+    final Map<String, dynamic> listData = json.decode(response.body);
+
+    final List<GroceryItem> _loadedItem = [];
+    for (final item in listData.entries) {
+      final category =
+          categories.entries
+              .firstWhere(
+                (catItem) => catItem.value.title == item.value['category'],
+              )
+              .value;
+      _loadedItem.add(
+        GroceryItem(
+          id: item.key,
+          name: item.value['name'],
+          quantity: item.value['quantity'],
+          category: category,
+        ),
+      );
+    }
+    setState(() {
+      _groceryItem = _loadedItem;
+    });
+  }
+
   void _addItem() async {
-    final newItem = await Navigator.of(
+    await Navigator.of(
       context,
     ).push<GroceryItem>(MaterialPageRoute(builder: (ctx) => NewItem()));
 
-    if (newItem == null) {
-      return;
-    } else {
-      setState(() {
-        _groceryItem.add(newItem);
-      });
-    }
+    _loadItem();
   }
 
   void _removedGroceryItem(GroceryItem item) {
