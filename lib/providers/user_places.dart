@@ -1,0 +1,16 @@
+import 'package:expense_trakcer/models/place.dart';
+import 'package:flutter_riverpod/legacy.dart';
+
+class UserPlacesNotifier extends StateNotifier<List<Places>> {
+  UserPlacesNotifier() : super(const []);
+
+  void addPlace(String title) {
+    final newPlace = Places(name: title);
+    state = [newPlace, ...state];
+  }
+}
+
+final userPlacesProvider =
+    StateNotifierProvider<UserPlacesNotifier, List<Places>>(
+      (ref) => UserPlacesNotifier(),
+    );
