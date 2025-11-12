@@ -17,9 +17,8 @@ class _PlacesScreenState extends ConsumerState<PlacesScreen> {
   late Future<void> _placesFuture;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _placesFuture = ref.watch(userPlacesProvider.notifier).loadPlaces();
+    _placesFuture = ref.read(userPlacesProvider.notifier).loadPlaces();
   }
 
   @override
