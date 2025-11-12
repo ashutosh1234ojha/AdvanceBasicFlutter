@@ -8,7 +8,7 @@ class PlacesDetailScree extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(place.name, style: TextStyle(color: Colors.white)),
+        title: Text(place.title, style: TextStyle(color: Colors.white)),
       ),
       body: Stack(
         children: [
@@ -17,6 +17,19 @@ class PlacesDetailScree extends StatelessWidget {
             fit: BoxFit.cover,
             height: double.infinity,
             width: double.infinity,
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Column(
+              children: [
+                Text(
+                  "Your location latitude ${place.location.lat}] and longitude ${place.location.long}]",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
           ),
         ],
       ),

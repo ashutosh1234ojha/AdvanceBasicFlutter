@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:expense_trakcer/models/place.dart';
 import 'package:expense_trakcer/providers/user_places.dart';
 import 'package:expense_trakcer/widgets/image_input.dart';
+import 'package:expense_trakcer/widgets/location_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,15 +19,18 @@ class AddNewPlaces extends ConsumerStatefulWidget {
 class _AddNewPlacesState extends ConsumerState<AddNewPlaces> {
   final _titleController = TextEditingController();
   File? _selectedImage;
+  PlaceLocation? _selectedLocation;
 
   void _savePlace() {
     final enteredText = _titleController.text;
-    if (enteredText.isEmpty || _selectedImage == null) {
+    if (enteredText.isEmpty ||
+        _selectedImage == null ||
+        _selectedLocation == null) {
       return;
     }
     ref
         .read(userPlacesProvider.notifier)
-        .addPlace(enteredText, _selectedImage!);
+        .addPlace(enteredText, _selectedImage!, _selectedLocation!);
     Navigator.of(context).pop();
   }
 
@@ -56,6 +61,13 @@ class _AddNewPlacesState extends ConsumerState<AddNewPlaces> {
               },
             ),
             SizedBox(height: 16),
+            LocationInput(
+              onLocationPicked: (location) {
+                _selectedLocation = location;
+              },
+            ),
+            SizedBox(height: 16),
+
             ElevatedButton.icon(
               onPressed: () {
                 _savePlace();

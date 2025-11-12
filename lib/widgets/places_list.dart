@@ -25,7 +25,11 @@ class PlacesList extends StatelessWidget {
               backgroundImage: FileImage(places[index].image),
             ),
             title: Text(
-              places[index].name,
+              places[index].title,
+              style: TextStyle(color: Colors.white),
+            ),
+            subtitle: Text(
+              "Your location latitude ${places[index].location.lat}] and longitude ${places[index].location.long}]",
               style: TextStyle(color: Colors.white),
             ),
             onTap: () {
