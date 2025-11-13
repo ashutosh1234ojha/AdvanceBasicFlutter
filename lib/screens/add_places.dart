@@ -20,12 +20,18 @@ class _AddNewPlacesState extends ConsumerState<AddNewPlaces> {
   final _titleController = TextEditingController();
   File? _selectedImage;
   PlaceLocation? _selectedLocation;
+  bool _isTitleFieldEmpty = false;
 
   void _savePlace() {
     final enteredText = _titleController.text;
     if (enteredText.isEmpty ||
         _selectedImage == null ||
         _selectedLocation == null) {
+      if (enteredText.isEmpty) {
+        setState(() {
+          _isTitleFieldEmpty = true;
+        });
+      }
       return;
     }
     ref
@@ -49,10 +55,26 @@ class _AddNewPlacesState extends ConsumerState<AddNewPlaces> {
         child: Column(
           children: [
             TextField(
+              onChanged: (value) {
+                setState(() {
+                  _isTitleFieldEmpty = false;
+                });
+              },
               decoration: const InputDecoration(labelText: "Title"),
               controller: _titleController,
               style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
             ),
+
+            if (_isTitleFieldEmpty)
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Title is empty",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+
             SizedBox(height: 10),
 
             ImageInput(

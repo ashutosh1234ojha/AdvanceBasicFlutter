@@ -62,7 +62,7 @@ class UserPlacesNotifier extends StateNotifier<List<Places>> {
       'title': newPlace.title,
       'image': newPlace.image.path,
       'lat': newPlace.location.lat,
-      'lan': newPlace.location.long,
+      'lng': newPlace.location.long,
       'address': 'address',
     });
 
