@@ -1,4 +1,4 @@
-import 'package:expense_trakcer/screens/places.dart';
+import 'package:expense_trakcer/screens/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,9 +30,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Great Places',
+      title: 'Chat App',
       theme: theme,
-      home: const PlacesScreen(),
+      home: const AuthScreen(),
     );
   }
 }
