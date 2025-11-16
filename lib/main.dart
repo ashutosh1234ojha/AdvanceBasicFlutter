@@ -1,4 +1,7 @@
 import 'package:expense_trakcer/screens/auth.dart';
+import 'package:expense_trakcer/screens/chat.dart';
+import 'package:expense_trakcer/screens/splash.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,7 +39,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Chat App',
       theme: theme,
-      home: const AuthScreen(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (ctx, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return SplashScreen();
+          }
+          if (snapshot.hasData) {
+            return ChatScreen();
+          } else {
+            return AuthScreen();
+          }
+        },
+      ),
     );
   }
 }
