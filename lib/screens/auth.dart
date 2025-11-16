@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+final _firebase = FirebaseAuth.instance;
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -15,10 +18,28 @@ class _AuthScreenState extends State<AuthScreen> {
   var _enteredPassword = '';
   final _form = GlobalKey<FormState>();
 
-  void _submit() {
+  void _submit() async {
     final isValid = _form.currentState!.validate();
-    if (isValid) {
-      _form.currentState!.save();
+    if (!isValid) {
+      return;
+    }
+    _form.currentState!.save();
+
+    if (_isLogin) {
+    } else {
+      try {
+        final UserCredentials = await _firebase.createUserWithEmailAndPassword(
+          email: _enteredEmail,
+          password: _enteredPassword,
+        );
+      } on FirebaseAuthException catch (error) {
+        if (error.code == 'email-already-in-use') {}
+
+        ScaffoldMessenger.of(context).clearSnackBars();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(error.message ?? 'Authentication failed.')),
+        );
+      }
     }
   }
 
@@ -53,9 +74,11 @@ class _AuthScreenState extends State<AuthScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           TextFormField(
+                            style: TextStyle(color: Colors.white),
                             decoration: const InputDecoration(
                               labelText: 'Email Address',
                             ),
+
                             keyboardType: TextInputType.emailAddress,
                             autocorrect: false,
                             textCapitalization: TextCapitalization.none,
@@ -72,6 +95,8 @@ class _AuthScreenState extends State<AuthScreen> {
                             },
                           ),
                           TextFormField(
+                            style: TextStyle(color: Colors.white),
+
                             decoration: const InputDecoration(
                               labelText: 'Password',
                             ),
