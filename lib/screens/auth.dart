@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:expense_trakcer/widgets/image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +20,8 @@ class _AuthScreenState extends State<AuthScreen> {
   var _enteredEmail = '';
   var _enteredPassword = '';
   final _form = GlobalKey<FormState>();
+
+  void _saveImage(File? image) {}
 
   void _submit() async {
     final isValid = _form.currentState!.validate();
@@ -66,6 +71,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 width: 200,
                 child: Image.asset('assets/images/chat.png'),
               ),
+              ImageWidget(saveImage: _saveImage),
               Card(
                 margin: const EdgeInsets.all(20),
                 child: SingleChildScrollView(
