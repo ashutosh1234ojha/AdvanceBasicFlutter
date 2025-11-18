@@ -50,6 +50,7 @@ class _AuthScreenState extends State<AuthScreen> {
             .doc(userCredentials.user!.uid)
             .set({
               'userName': _enteredUsername,
+              'userId': userCredentials.user!.uid,
               'email': _enteredEmail,
               'imaage_url': 'imageUrl',
             });
